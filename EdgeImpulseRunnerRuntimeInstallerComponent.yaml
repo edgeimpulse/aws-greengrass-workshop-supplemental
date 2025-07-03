@@ -1,0 +1,43 @@
+---
+RecipeFormatVersion: "2020-01-25"
+ComponentName: "EdgeImpulseRunnerRuntimeInstallerComponent"
+ComponentVersion: "1.0.0"
+ComponentDescription: "Runtime/Samples Installer for Edge Impulse Serial Runner for reInvent"
+ComponentPublisher: "EdgeImpulse"
+ComponentDependencies:
+  aws.greengrass.TokenExchangeService:
+    VersionRequirement: ">=0.0.0"
+    DependencyType: "HARD"
+ComponentConfiguration:
+  DefaultConfiguration:
+    Parameters: {
+      "nodejs_ver": "v20.18.2",
+      "local_artifacts": "no",
+      "artifacts_dir": "/local_assets",
+      "target_dir": "/home/ggc_user",
+      "target_user": "ggc_user",
+      "target_group": "ggc_group",
+      "ei_ggc_user_groups": "video audio input users system"
+    }
+Manifests:
+  - Name: "Default"
+    Platform:
+      os: linux
+      runtime: "*"
+    Lifecycle:
+      setenv: {
+              "CONFIG_PARAMETERS": "{configuration:/Parameters}"
+              }
+      install: 
+        RequiresPrivilege: true
+        Timeout: 9000
+        Script: |- 
+            chmod 755 {artifacts:path}/install.sh
+            sh {artifacts:path}/install.sh {artifacts:path} {configuration:/Parameters/nodejs_ver} {configuration:/Parameters/target_dir} {configuration:/Parameters/target_user} {configuration:/Parameters/target_group} {configuration:/Parameters/local_artifacts} {configuration:/Parameters/artifacts_dir} {configuration:/Parameters/ei_ggc_user_groups}
+      run:
+        Script: |-
+            /bin/true
+    Artifacts:
+      - Uri: s3://mys3repo123987/artifacts/EdgeImpulseRunnerRuntime/1.0.0/install.sh
+      - Uri: s3://mys3repo123987/artifacts/EdgeImpulseRunnerRuntime/1.0.0/models.tar.gz
+      - Uri: s3://mys3repo123987/artifacts/EdgeImpulseRunnerRuntime/1.0.0/samples.tar.gz
