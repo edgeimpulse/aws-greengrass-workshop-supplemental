@@ -38,6 +38,6 @@ Manifests:
         Script: |-
             /bin/true
     Artifacts:
-      - Uri: s3://mys3repo123987/artifacts/EdgeImpulseRunnerRuntime/1.0.0/install.sh
-      - Uri: s3://mys3repo123987/artifacts/EdgeImpulseRunnerRuntime/1.0.0/models.tar.gz
-      - Uri: s3://mys3repo123987/artifacts/EdgeImpulseRunnerRuntime/1.0.0/samples.tar.gz
+      - Uri: s3://YOUR_S3_ARTIFACT_BUCKET/artifacts/EdgeImpulseRunnerRuntime/1.0.0/install.sh
+      - Uri: s3://YOUR_S3_ARTIFACT_BUCKET/artifacts/EdgeImpulseRunnerRuntime/1.0.0/models.tar.gz
+      - Uri: s3://YOUR_S3_ARTIFACT_BUCKET/artifacts/EdgeImpulseRunnerRuntime/1.0.0/samples.tar.gz
